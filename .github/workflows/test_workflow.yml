@@ -23,3 +23,13 @@ jobs:
             job-name: "test ServiceNow DevOps Change"
             # change-request
             change-request: '{"setCloseCode":"true","attributes":{"short_description":"Public Cloud 운영관리_AP 변경","description":"Public Cloud 운영관리_AP 변경","assignment_group":{"name":"Public Cloud 운영관리_AP"},"implementation_plan":"소프트웨어 업데이트 관련 테스트 이력 및 결과는 테스트 요약 탭에서 확인 할 수 있습니다.; 변경이 승인되면, 예정된 변경 시작 및 종료 시간 사이에 CICD Pipeline이 실행될 것입니다.","backout_plan":"변경 배포에 실패하면, 이전 버전의 소프트웨어가 재배포될 예정입니다.","test_plan":"CICD Pipeline에서 자동화된 테스트 수행, Pipeline 작업 로그를 확인 해주세요."}}'
+            deployment-gate: '{"environment":"test-git-environment","jobName":"Deploy"}'
+
+  deploy:
+    name: "Deploy"
+    environment: test-git-environment
+    needs: change
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deployment scripts
+        run: echo 'Deployment step in progress...'
